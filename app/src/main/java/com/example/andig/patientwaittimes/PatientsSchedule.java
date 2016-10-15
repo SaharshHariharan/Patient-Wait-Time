@@ -1,13 +1,10 @@
 package com.example.andig.patientwaittimes;
 
 import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.Toast;
 
 public class PatientsSchedule extends AppCompatActivity {
 
@@ -25,10 +22,7 @@ public class PatientsSchedule extends AppCompatActivity {
     }
 
     public void switcher (View view){
-        if (view.getId() == R.id.button); {
-            Intent intent = new Intent (PatientsSchedule.this, FilterDateTime.class);
-            startActivity(intent);
-        }
-
+        Intent intent = new Intent (PatientsSchedule.this, FilterDateTime.class);
+        startActivity(intent);
     }
 }
