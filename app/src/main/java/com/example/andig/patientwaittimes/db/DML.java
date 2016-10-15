@@ -3,9 +3,9 @@ package com.example.andig.patientwaittimes.db;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabaseLockedException;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -19,23 +19,24 @@ public class DML extends DatabaseOperator {
     public DML(Context context) {
         super(context);
         database = open();
-        database.beginTransaction();
+        destroyAll(database);
+        onCreate(database);
         fillData();
-        try {
-            addAppointment(2000, 10, 10, 10, 10, 2, 1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     public void fillData() {
-        database.beginTransaction();
         database.execSQL("INSERT INTO Doctor (name) VALUES ('Test doctor');");
         database.execSQL("INSERT INTO Patient (doctor_id, name, username, password) VALUES\n" +
                 "  ((SELECT id FROM Doctor WHERE Doctor.name == 'Test doctor'),\n" +
                 "    'Test patient',\n" +
                 "    'test',\n" +
                 "    'test');");
+        try {
+            addAppointment(2000, 10, 10, 10, 10, 2, 1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Integer verifyUser(String username, String password) {
@@ -45,6 +46,7 @@ public class DML extends DatabaseOperator {
             return cursor.getInt(0);
         }
         cursor.close();
+
         return null;
     }
 
@@ -55,11 +57,12 @@ public class DML extends DatabaseOperator {
             return cursor.getInt(0);
         }
         cursor.close();
+
         return null;
     }
 
-    public void endInteraction() {
-        database.endTransaction();
+    public void close() {
+        database.close();
     }
 
     public void addAppointment(int year, int month, int day, int hour, int minute, int patients, int patient_id) throws ParseException {
@@ -80,21 +83,26 @@ public class DML extends DatabaseOperator {
                 "('" + formattedDate + "', '" + formattedNewDate + "', " + patient_id + ", " + doctorId + ");";
         System.out.println(sql);
         database.execSQL(sql);
+
+
     }
 
     public void updateProgress(int appointmentId) {
         String sql = "UPDATE " + APPOINTMENT_TABLE_NAME + " SET in_progress = 'TRUE' WHERE id == " + appointmentId + ";";
         database.execSQL(sql);
+
     }
 
     public void updateApproved(int appointmentId) {
         String sql = "UPDATE " + APPOINTMENT_TABLE_NAME + " SET approved = 'TRUE' WHERE id == " + appointmentId + ";";
         database.execSQL(sql);
+
     }
 
     public void deleteAppointment(int appointmentId) {
         String sql = "DELETE FROM " + APPOINTMENT_TABLE_NAME + " WHERE id == " + appointmentId + ";";
         database.execSQL(sql);
+
     }
 
     public Integer getAppointmentId(String startTime) {
@@ -104,6 +112,7 @@ public class DML extends DatabaseOperator {
             return cursor.getInt(0);
         }
         cursor.close();
+
         return null;
     }
 
@@ -138,6 +147,7 @@ public class DML extends DatabaseOperator {
         }
 
         cursor.close();
+
         return result;
     }
 
@@ -148,6 +158,7 @@ public class DML extends DatabaseOperator {
             return new String[] {cursor.getString(0), cursor.getString(1)};
         }
         cursor.close();
+
         return null;
     }
 
@@ -160,5 +171,15 @@ public class DML extends DatabaseOperator {
         int start = Integer.parseInt(startTokens[0]) * 3600 + Integer.parseInt(startTokens[1]) * 60 +
                 Integer.parseInt(startTokens[0]);
         return start - end >= minimum;
+    }
+
+
+    public SQLiteDatabase open() {
+        if (database != null) {
+
+            database.close();
+        }
+        database = getWritableDatabase();
+        return database;
     }
 }

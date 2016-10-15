@@ -11,14 +11,14 @@ public class PatientsSchedule extends AppCompatActivity {
 
     CalendarView calendar;
     Button button;
-    int ID;
+    Integer ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_schedule);
 
-        ID = getIntent().getIntExtra("ID", 0);
+        ID = getIntent().getIntExtra("ID", -1);
         button = (Button)findViewById(R.id.button);
         calendar = (CalendarView) findViewById (R.id.calendar);
 
@@ -26,6 +26,7 @@ public class PatientsSchedule extends AppCompatActivity {
 
     public void switcher (View view){
         Intent intent = new Intent (PatientsSchedule.this, FilterDateTime.class);
+        intent.putExtra("ID", ID);
         startActivity(intent);
     }
 }

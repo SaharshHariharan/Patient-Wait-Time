@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TimePicker;
 
+import com.example.andig.patientwaittimes.db.DML;
+
+import java.text.ParseException;
+
 import static com.example.andig.patientwaittimes.R.id.timePicker;
 import static java.lang.System.in;
 
@@ -21,7 +25,7 @@ public class FilterDateTime extends AppCompatActivity {
 
     int hour;
     int min;
-
+    int ID;
     int Year;
     int Month;
     int Day;
@@ -32,7 +36,7 @@ public class FilterDateTime extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_date_time);
-
+        ID = getIntent().getIntExtra("ID", -1);
         calendar = (CalendarView) findViewById(R.id.calendar);
 
     }
@@ -52,7 +56,12 @@ public class FilterDateTime extends AppCompatActivity {
             timePicker1 = (TimePicker) findViewById(R.id.timePicker);
             hour = timePicker1.getCurrentHour();
             min = timePicker1.getCurrentMinute();
-
+            DML dml = new DML(getApplicationContext());
+            try {
+                dml.addAppointment(Year, Month, Day, hour, min, 1, ID);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             intent.putExtra("hour", hour);
             intent.putExtra("Year", Year);
             intent.putExtra("Day", Day);
