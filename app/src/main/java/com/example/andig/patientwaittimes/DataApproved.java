@@ -7,6 +7,7 @@ import android.widget.TimePicker;
 
 public class DataApproved extends AppCompatActivity {
 
+    String AMPM = "AM";
     int Hour;
     int Year;
     int Month;
@@ -24,10 +25,23 @@ public class DataApproved extends AppCompatActivity {
         Min = getIntent().getIntExtra("min", 0);
         Day = getIntent().getIntExtra("Day", 0);
 
+        if (Hour > 12) {
+            Hour = Hour - 12;
+            AMPM = "PM";
+        }
 
-        /*TextView tv = (TextView) findViewById(R.id.textView3);
-        tv.setText("you have entered"+Hour+"as the integer");*/
+        TextView Time = (TextView) findViewById(R.id.textView3);
+        TextView Date = (TextView) findViewById(R.id.textView8);
+
+
+        if (Min < 10) {
+            Time.setText(Hour + " :0" + Min + AMPM);
+            Date.setText(Day + "/" + Month + "/" + Year);
+        }else
+            Time.setText(Hour + " :" + Min + AMPM);
+        Date.setText(Day + "/" + Month + "/" + Year);}
+
 
     }
-}
+
 
