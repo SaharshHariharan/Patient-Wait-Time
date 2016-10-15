@@ -10,46 +10,60 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TimePicker;
 
+import static com.example.andig.patientwaittimes.R.id.timePicker;
 import static java.lang.System.in;
 
 public class FilterDateTime extends AppCompatActivity {
 
     CalendarView calendar;
-    String Time;
+
+    int hour;
+    int min;
+
     int Year;
     int Month;
     int Day;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_date_time);
 
-        calendar = (CalendarView) findViewById (R.id.ccalendar);
+        calendar = (CalendarView) findViewById(R.id.calendar);
 
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+    }
+
+    public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+        Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month + 1) + "/" + year, Toast.LENGTH_LONG).show();
+        Year = year;
+        Month = month;
+        Day = dayOfMonth;
+    }
+
+    public void switcher (View view){
+        if(view.getId() == R.id.button2){
+            TimePicker timePicker1;
+            timePicker1 = (TimePicker) findViewById(R.id.timePicker);
+            hour = timePicker1.getCurrentHour();
+            min = timePicker1.getCurrentMinute();
+
+            Intent intent = new Intent (FilterDateTime.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
 
 
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month , int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" +  (month + 1) + "/" + year, Toast.LENGTH_LONG).show();
-                Year = year;
-                Month = month;
-                Day = dayOfMonth;
 
-            }
-
-
-        });}
-
-        private EditText time;
-        //public void onSubmit (View view) {
-
-           // time = (EditText) findViewById(R.id.editText);
-            //Time = time.getText().toString();
-           // System.out.println(Time);
-       // }
 
 
 }
+
+
+
+
+
+
