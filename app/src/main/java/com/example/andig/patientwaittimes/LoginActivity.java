@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +30,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.andig.patientwaittimes.db.PatientTableDML;
+import com.example.andig.patientwaittimes.db.DML;
 
-import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +49,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -301,10 +293,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            PatientTableDML operator = new PatientTableDML(getApplicationContext());
-            id = operator.verifyUser(mEmail, mPassword);
+            DML dml = new DML(getApplicationContext());
+            id = dml.verifyUser(mEmail, mPassword);
             System.out.println(id);
-            operator.endInteraction();
+            dml.endInteraction();
             return id != null;
         }
 
@@ -314,14 +306,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                switcher(mLoginFormView);
+                switcher();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
         }
 
-        public void switcher(View v) {
+        void switcher() {
             Intent intent = new Intent(LoginActivity.this, PatientsSchedule.class);
             startActivity(intent);
         }
