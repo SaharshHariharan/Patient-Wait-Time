@@ -11,12 +11,14 @@ public class PatientsSchedule extends AppCompatActivity {
 
     CalendarView calendar;
     Button button;
+    int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_schedule);
 
+        ID = getIntent().getIntExtra("ID", 0);
         button = (Button)findViewById(R.id.button);
         calendar = (CalendarView) findViewById (R.id.calendar);
 

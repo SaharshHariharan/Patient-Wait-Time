@@ -292,7 +292,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                startActivity(new Intent(LoginActivity.this, PatientsSchedule.class));
+                Intent intent = new Intent (LoginActivity.this, PatientsSchedule.class);
+                intent.putExtra("ID", id);
+                startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
