@@ -31,7 +31,8 @@ public class PatientTableDML extends DatabaseOperator {
     }
 
     public Integer verifyUser(String username, String password) {
-        String sql = "SELECT id FROM Patient";
+        String sql = "SELECT id FROM " + PATIENT_TABLE_NAME + " WHERE username == '" + username + "' AND password == '" + password + "';";
+        System.out.println(sql);
         Cursor cursor = database.rawQuery(sql, null);
         System.out.println(cursor.getColumnCount());
         if (cursor.moveToFirst()) {
@@ -39,5 +40,9 @@ public class PatientTableDML extends DatabaseOperator {
         }
         cursor.close();
         return null;
+    }
+
+    public void endInteraction() {
+        database.endTransaction();
     }
 }
