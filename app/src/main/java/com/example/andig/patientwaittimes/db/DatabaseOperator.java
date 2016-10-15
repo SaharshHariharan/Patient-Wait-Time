@@ -39,7 +39,9 @@ public class DatabaseOperator extends SQLiteOpenHelper {
 
     public DatabaseOperator(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        onCreate(getWritableDatabase());
+        SQLiteDatabase database = getWritableDatabase();
+        destroyAll(database);
+        onCreate(database);
     }
 
     @Override
@@ -50,7 +52,9 @@ public class DatabaseOperator extends SQLiteOpenHelper {
     }
 
     public void destroyAll(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE " + APPOINTMENT_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + APPOINTMENT_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PATIENT_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DOCTOR_TABLE_NAME);
 
     }
 

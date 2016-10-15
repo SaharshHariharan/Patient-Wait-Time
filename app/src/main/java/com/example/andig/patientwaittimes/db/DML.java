@@ -1,13 +1,13 @@
 package com.example.andig.patientwaittimes.db;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,13 @@ public class DML extends DatabaseOperator {
     public DML(Context context) {
         super(context);
         database = open();
+        database.beginTransaction();
         fillData();
+        try {
+            addAppointment(2000, 10, 10, 10, 10, 2, 1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void fillData() {
@@ -62,10 +68,11 @@ public class DML extends DatabaseOperator {
         cal.setTime(date);
         cal.add(Calendar.MINUTE, patients * 20);
         Date newTime = cal.getTime();
-        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-DD HH:mm");
         Integer doctorId = getDoctorId(patient_id);
+        String formattedDate = year + "-" + month + "-" + day + " " + hour + ":" + minute;
+        String formattedNewDate = newTime.getYear() + "-" + newTime.getMonth() + "-" + newTime.getDay() + " " + newTime.getHours() + ":" + newTime.getMinutes();
         String sql = "INSERT INTO APPOINTMENT (start, end, patient_id, doctor_id) VALUES " +
-                "('" + df.format(date) + "', '" + df.format(newTime) + "', " + patient_id + ", " + doctorId + ");";
+                "('" + formattedDate + "', '" + formattedNewDate + "', " + patient_id + ", " + doctorId + ");";
         System.out.println(sql);
         database.execSQL(sql);
     }
@@ -97,7 +104,7 @@ public class DML extends DatabaseOperator {
 
     public List<String[]> availableTimes(int year, int month, int day, int patientId, int patients) {
         String date = year + "-" + month + "-" + day;
-        String sql = "SELECT TIME(START), TIME(END) FROM " + APPOINTMENT_TABLE_NAME + " WHERE (DATE(start) == " + date + ") ORDER BY start;";
+        String sql = "SELECT TIME(START), TIME(END) FROM " + APPOINTMENT_TABLE_NAME + " WHERE (DATE(start) == '" + date + "') ORDER BY start;";
         System.out.println(sql);
         Cursor cursor = database.rawQuery(sql, null);
         List<String[]> result = new ArrayList<>();
@@ -105,7 +112,11 @@ public class DML extends DatabaseOperator {
         String newStart = hours[0];
         String end;
         if (cursor.moveToFirst()) {
+            System.out.println(cursor.getType(1));
+            System.out.println(cursor.getType(0));
             end = cursor.getString(1);
+            System.out.println(Arrays.toString(cursor.getColumnNames()));
+            System.out.println(cursor.getColumnCount());
             if (goodInterval(end, newStart, patients)) {
                 result.add(new String[] {end, newStart});
             }
