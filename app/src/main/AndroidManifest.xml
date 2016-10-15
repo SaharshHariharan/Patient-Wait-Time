@@ -8,8 +8,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <resources>
-        <string name="app_name">Android Date Picker
-        </string>
+        <string name="app_name">Android Date Picker </string>
     </resources>
 
     <application
