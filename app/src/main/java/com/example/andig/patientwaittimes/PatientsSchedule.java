@@ -1,9 +1,7 @@
 package com.example.andig.patientwaittimes;
 
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CalendarView;
 import android.widget.Toast;
 

@@ -21,19 +21,20 @@ public class DatabaseOperator extends SQLiteOpenHelper {
             ");";
     private static final String CREATE_PATIENT_TABLE = "CREATE TABLE Patient (\n" +
             "  id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "  doctor_id INTEGER        ,\n" +
+            "  doctor_id INTEGER        NOT NULL,\n" +
             "  name      VARCHAR        NOT NULL,\n" +
             "  username  VARCHAR UNIQUE NOT NULL,\n" +
             "  password  CHAR(20)       NOT NULL,\n" +
             "  FOREIGN KEY (doctor_id) REFERENCES Doctor (id)\n" +
             ");";
     private static final String CREATE_APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +
+            "  id          INTEGER PRIMARY KEY      AUTOINCREMENT,\n" +
             "  start       DATETIME NOT NULL,\n" +
             "  end         DATETIME NOT NULL,\n" +
             "  doctor_id   INTEGER  NOT NULL,\n" +
             "  patient_id  INTEGER  NOT NULL,\n" +
-            "  in_progress BOOLEAN DEFAULT FALSE,\n" +
-            "  approved    BOOLEAN DEFAULT FALSE,\n" +
+            "  in_progress BOOLEAN                  DEFAULT FALSE,\n" +
+            "  approved    BOOLEAN                  DEFAULT FALSE,\n" +
             "  FOREIGN KEY (doctor_id) REFERENCES Doctor (id),\n" +
             "  FOREIGN KEY (patient_id) REFERENCES Patient (id)\n" +
             ");";

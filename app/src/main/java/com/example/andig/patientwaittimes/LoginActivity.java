@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +30,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.andig.patientwaittimes.db.PatientTableDML;
+import com.example.andig.patientwaittimes.db.PatientDML;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,7 +299,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            PatientTableDML operator = new PatientTableDML(getApplicationContext());
+            PatientDML operator = new PatientDML(getApplicationContext());
             id = operator.verifyUser(mEmail, mPassword);
             System.out.println(id);
             operator.endInteraction();
