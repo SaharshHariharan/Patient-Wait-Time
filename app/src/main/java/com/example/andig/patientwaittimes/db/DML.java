@@ -1,13 +1,16 @@
 package com.example.andig.patientwaittimes.db;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class DML extends DatabaseOperator {
@@ -90,5 +93,35 @@ public class DML extends DatabaseOperator {
         }
         cursor.close();
         return null;
+    }
+
+    public List<String[]> availableTimes(int year, int month, int day, int patientId, int patients) {
+        String date = year + "-" + month + "-" + day;
+        String sql = "SELECT TIME(START), TIME(END) FROM " + APPOINTMENT_TABLE_NAME + " WHERE (DATE(start) == " + date + " ORDER BY start;";
+        Cursor cursor = database.rawQuery(sql, null);
+        List<String[]> result = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            String end = cursor.getString(1);
+            while (cursor.moveToNext()) {
+                String newStart = cursor.getString(0);
+                if (goodInterval(end, newStart, patients)) {
+                    result.add(new String[] {end, newStart});
+                }
+            }
+        }
+        cursor.moveToNext();
+        cursor.close();
+        return result;
+    }
+
+    private boolean goodInterval(String endTime, String startTime, int patients) {
+        int minimum = patients * 20 * 60;
+        String[] endTokens = endTime.split(":");
+        String[] startTokens = startTime.split(":");
+        int end = Integer.parseInt(endTokens[0]) * 3600 + Integer.parseInt(endTokens[1]) * 60 +
+                Integer.parseInt(endTokens[0]);
+        int start = Integer.parseInt(startTokens[0]) * 3600 + Integer.parseInt(startTokens[1]) * 60 +
+                Integer.parseInt(startTokens[0]);
+        return start - end >= minimum;
     }
 }
