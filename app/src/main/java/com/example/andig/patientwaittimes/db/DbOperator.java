@@ -40,6 +40,7 @@ public class DbOperator extends SQLiteOpenHelper {
 
     public DbOperator(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
@@ -47,6 +48,9 @@ public class DbOperator extends SQLiteOpenHelper {
         db.execSQL(CREATE_DOCTOR_TABLE);
         db.execSQL(CREATE_PATIENT_TABLE);
         db.execSQL(CREATE_APPOINTMENT_TABLE);
+
+        // Sample data!
+
     }
 
     @Override
