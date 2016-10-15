@@ -13,7 +13,7 @@ public class DbOperator extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "test-db";
     private static final String DOCTOR_TABLE_NAME = "Doctor";
-    private static final String PATIENT_TABLE_NAME = "Patient";
+    static final String PATIENT_TABLE_NAME = "Patient";
     private static final String APPOINTMENT_TABLE_NAME = "Appointment";
     private static final String CREATE_DOCTOR_TABLE = "CREATE TABLE " + DOCTOR_TABLE_NAME + " (\n" +
             "  id   INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
@@ -47,11 +47,6 @@ public class DbOperator extends SQLiteOpenHelper {
         db.execSQL(CREATE_DOCTOR_TABLE);
         db.execSQL(CREATE_PATIENT_TABLE);
         db.execSQL(CREATE_APPOINTMENT_TABLE);
-        db.close();
-    }
-
-    public Integer verifyUser(String email, String password) {
-        String getPatient = "";
     }
 
     @Override
