@@ -3,6 +3,7 @@ package com.example.andig.patientwaittimes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -313,11 +314,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                switcher(mLoginFormView);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
+        }
+
+        public void switcher(View v) {
+            Intent intent = new Intent(LoginActivity.this, PatientsSchedule.class);
+            startActivity(intent);
         }
 
         @Override
