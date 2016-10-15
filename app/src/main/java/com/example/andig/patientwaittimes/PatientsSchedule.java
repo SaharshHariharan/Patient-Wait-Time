@@ -1,33 +1,40 @@
 package com.example.andig.patientwaittimes;
 
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
 public class PatientsSchedule extends AppCompatActivity {
 
-    CalendarView calendar;
+    //CalendarView calendar;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_schedule);
 
-
-    calendar = (CalendarView) findViewById (R.id.calendar);
-    calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
-
-        @Override
-        public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-            Toast.makeText(getApplicationContext(), dayOfMonth + "/" +  month + "/" + year, Toast.LENGTH_LONG).show();
-        }
-
-
-    });
+        button = (Button)findViewById(R.id.button);
+        //calendar = (CalendarView) findViewById (R.id.calendar);
 
     }
+
+    public void switcher (View view){
+        if (view.getId() == R.id.button); {
+            Intent intent = new Intent (PatientsSchedule.this, FilterDateTime.class);
+            startActivity(intent);
+        }
+
+    }
+
+
+
+
+
 }
+

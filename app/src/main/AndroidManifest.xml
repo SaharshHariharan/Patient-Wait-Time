@@ -7,9 +7,6 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <resources>
-        <string name="app_name">Android Date Picker </string>
-    </resources>
 
     <application
         android:allowBackup="true"
@@ -26,7 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".PatientsSchedule"></activity>
+        <activity android:name=".FilterDateTime"></activity>
     </application>
 
 </manifest>
