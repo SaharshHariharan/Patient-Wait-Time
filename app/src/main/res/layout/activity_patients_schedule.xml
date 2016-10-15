@@ -18,7 +18,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Button"
+        android:text="Click to Book New Appointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="74dp"

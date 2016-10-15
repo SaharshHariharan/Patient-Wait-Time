@@ -1,37 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.andig.patientwaittimes.FilterDateTime">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.andig.patientwaittimes.FilterDateTime">
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_patients_schedule"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PatientsSchedule">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_patients_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".PatientsSchedule">
 
-    <CalendarView   android:id="@+id/ccalendar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        <TimePicker
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:id="@+id/timePicker"
+            android:layout_marginTop="72dp"
+            android:layout_below="@+id/ccalendar"
+            android:layout_centerHorizontal="true"
+            android:headerBackground="@android:color/holo_blue_dark" />
 
-    <TimePicker
-        android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:id="@+id/timePicker"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="314dp" />
+        <TextView
+            android:text="Please select your desired date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:id="@+id/textView2" />
+
+        <CalendarView   android:id="@+id/ccalendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="28dp"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="Please select your desired time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_below="@+id/ccalendar"
+            android:layout_marginTop="34dp"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="Press to submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_alignTop="@+id/timePicker"
+            android:onClick="switcher"
+            android:layout_marginTop="393dp"
+            android:layout_alignEnd="@+id/timePicker" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
 
 </ScrollView>
