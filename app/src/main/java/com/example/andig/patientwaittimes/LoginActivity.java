@@ -271,17 +271,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
         private Integer id;
+        private DML dml;
 
         UserLoginTask(String username, String password) {
             mEmail = username;
             mPassword = password;
+
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            DML dml = new DML(getApplicationContext());
+            dml = new DML(getApplicationContext());
             id = dml.verifyUser(mEmail, mPassword);
-            dml.endInteraction();
             dml.close();
             return id != null;
         }
