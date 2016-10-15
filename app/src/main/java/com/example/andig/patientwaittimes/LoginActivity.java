@@ -1,5 +1,6 @@
 package com.example.andig.patientwaittimes;
 
+import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -280,8 +281,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             DML dml = new DML(getApplicationContext());
             id = dml.verifyUser(mEmail, mPassword);
-            System.out.println(id);
-            System.out.println(dml.availableTimes(2000, 10, 10, 1, 1));
             dml.endInteraction();
             dml.close();
             return id != null;

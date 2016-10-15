@@ -70,7 +70,12 @@ public class DML extends DatabaseOperator {
         Date newTime = cal.getTime();
         Integer doctorId = getDoctorId(patient_id);
         String formattedDate = year + "-" + month + "-" + day + " " + hour + ":" + minute;
-        String formattedNewDate = newTime.getYear() + "-" + newTime.getMonth() + "-" + newTime.getDay() + " " + newTime.getHours() + ":" + newTime.getMinutes();
+        String formattedNewDate = newTime.getYear() + "-";
+        formattedNewDate += (newTime.getMonth() < 10 ? "0":"") + newTime.getMonth() + "-";
+        formattedNewDate += (newTime.getDay() < 10 ? "0":"") + newTime.getDay() + " ";
+        formattedNewDate += (newTime.getHours() < 10 ? "0":"") + newTime.getHours() + ":";
+        formattedNewDate += (newTime.getMinutes() < 10 ? "0":"") + newTime.getMinutes();
+
         String sql = "INSERT INTO APPOINTMENT (start, end, patient_id, doctor_id) VALUES " +
                 "('" + formattedDate + "', '" + formattedNewDate + "', " + patient_id + ", " + doctorId + ");";
         System.out.println(sql);
@@ -111,12 +116,11 @@ public class DML extends DatabaseOperator {
         String[] hours = getDoctorHours(getDoctorId(patientId));
         String newStart = hours[0];
         String end;
+        System.out.println(cursor.getColumnCount());
         if (cursor.moveToFirst()) {
-            System.out.println(cursor.getType(1));
-            System.out.println(cursor.getType(0));
+            System.out.println(cursor.getString(0) + " " + cursor.getString(1));
             end = cursor.getString(1);
             System.out.println(Arrays.toString(cursor.getColumnNames()));
-            System.out.println(cursor.getColumnCount());
             if (goodInterval(end, newStart, patients)) {
                 result.add(new String[] {end, newStart});
             }
