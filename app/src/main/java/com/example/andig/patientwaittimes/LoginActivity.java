@@ -29,6 +29,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.andig.patientwaittimes.db.DbOperator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Id to identity READ_CONTACTS permission request.
      */
+
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
@@ -69,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -346,5 +348,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
 }
 
