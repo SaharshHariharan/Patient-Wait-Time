@@ -23,10 +23,11 @@ public class PatientsSchedule extends AppCompatActivity {
 
         @Override
         public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-            Toast.makeText(PatientsSchedule.this, "hello", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), dayOfMonth + "/" +  month + "/" + year, Toast.LENGTH_LONG).show();
         }
 
 
-    }       );
+    });
 
-    }        }
+    }
+}
