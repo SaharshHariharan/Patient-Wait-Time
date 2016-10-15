@@ -97,21 +97,43 @@ public class DML extends DatabaseOperator {
 
     public List<String[]> availableTimes(int year, int month, int day, int patientId, int patients) {
         String date = year + "-" + month + "-" + day;
-        String sql = "SELECT TIME(START), TIME(END) FROM " + APPOINTMENT_TABLE_NAME + " WHERE (DATE(start) == " + date + " ORDER BY start;";
+        String sql = "SELECT TIME(START), TIME(END) FROM " + APPOINTMENT_TABLE_NAME + " WHERE (DATE(start) == " + date + ") ORDER BY start;";
+        System.out.println(sql);
         Cursor cursor = database.rawQuery(sql, null);
         List<String[]> result = new ArrayList<>();
+        String[] hours = getDoctorHours(getDoctorId(patientId));
+        String newStart = hours[0];
+        String end;
         if (cursor.moveToFirst()) {
-            String end = cursor.getString(1);
+            end = cursor.getString(1);
+            if (goodInterval(end, newStart, patients)) {
+                result.add(new String[] {end, newStart});
+            }
             while (cursor.moveToNext()) {
-                String newStart = cursor.getString(0);
+                newStart = cursor.getString(0);
                 if (goodInterval(end, newStart, patients)) {
                     result.add(new String[] {end, newStart});
                 }
+                end = cursor.getString(1);
             }
         }
-        cursor.moveToNext();
+        end = hours[1];
+        if (goodInterval(end, newStart, patients)) {
+            result.add(new String[] {end, newStart});
+        }
+
         cursor.close();
         return result;
+    }
+
+    public String[] getDoctorHours(int doctorId) {
+        String sql = "SELECT start, end FROM Doctor WHERE id == " + doctorId + ";";
+        Cursor cursor = database.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            return new String[] {cursor.getString(0), cursor.getString(1)};
+        }
+        cursor.close();
+        return null;
     }
 
     private boolean goodInterval(String endTime, String startTime, int patients) {

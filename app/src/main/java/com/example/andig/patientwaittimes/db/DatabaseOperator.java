@@ -13,7 +13,9 @@ public class DatabaseOperator extends SQLiteOpenHelper {
     static final String APPOINTMENT_TABLE_NAME = "Appointment";
     private static final String CREATE_DOCTOR_TABLE = "CREATE TABLE Doctor (\n" +
             "  id   INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "  name VARCHAR NOT NULL\n" +
+            "  name VARCHAR NOT NULL,\n" +
+            "  start TIME DEFAULT '08:00',\n" +
+            "  end TIME DEFAULT '16:00'\n" +
             ");";
     private static final String CREATE_PATIENT_TABLE = "CREATE TABLE Patient (\n" +
             "  id        INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
@@ -24,20 +26,20 @@ public class DatabaseOperator extends SQLiteOpenHelper {
             "  FOREIGN KEY (doctor_id) REFERENCES Doctor (id)\n" +
             ");";
     private static final String CREATE_APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +
-            "  id       DATETIME NOT NULL,\n" +
-            "  start       DATETIME NOT NULL,\n" +
-            "  end         DATETIME NOT NULL,\n" +
+            "  id          INTEGER PRIMARY KEY      AUTOINCREMENT,\n" +
+            "  start       DATETIME NOT NULL DEFAULT '2000-01-01 00:01',\n" +
+            "  end         DATETIME NOT NULL DEFAULT '2000-01-01 01:00',\n" +
             "  doctor_id   INTEGER  NOT NULL,\n" +
             "  patient_id  INTEGER  NOT NULL,\n" +
-            "  in_progress BOOLEAN DEFAULT FALSE,\n" +
-            "  approved    BOOLEAN DEFAULT FALSE,\n" +
+            "  in_progress BOOLEAN                  DEFAULT FALSE,\n" +
+            "  approved    BOOLEAN                  DEFAULT FALSE,\n" +
             "  FOREIGN KEY (doctor_id) REFERENCES Doctor (id),\n" +
             "  FOREIGN KEY (patient_id) REFERENCES Patient (id)\n" +
             ");";
 
     public DatabaseOperator(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
+        onCreate(getWritableDatabase());
     }
 
     @Override
@@ -45,6 +47,11 @@ public class DatabaseOperator extends SQLiteOpenHelper {
         db.execSQL(CREATE_DOCTOR_TABLE);
         db.execSQL(CREATE_PATIENT_TABLE);
         db.execSQL(CREATE_APPOINTMENT_TABLE);
+    }
+
+    public void destroyAll(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE " + APPOINTMENT_TABLE_NAME);
+
     }
 
     @Override
