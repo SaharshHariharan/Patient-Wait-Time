@@ -281,6 +281,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             DML dml = new DML(getApplicationContext());
             id = dml.verifyUser(mEmail, mPassword);
             System.out.println(id);
+            System.out.println(dml.availableTimes(2000, 10, 10, 1, 1));
             dml.endInteraction();
             return id != null;
         }
