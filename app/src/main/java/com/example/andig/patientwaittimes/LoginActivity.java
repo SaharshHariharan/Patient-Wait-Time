@@ -39,7 +39,7 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via username/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -293,8 +293,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
         private Integer id;
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
+        UserLoginTask(String username, String password) {
+            mEmail = username;
             mPassword = password;
         }
 
@@ -303,6 +303,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             PatientTableDML operator = new PatientTableDML(getApplicationContext());
             id = operator.verifyUser(mEmail, mPassword);
             System.out.println(id);
+            operator.endInteraction();
             return id != null;
         }
 
