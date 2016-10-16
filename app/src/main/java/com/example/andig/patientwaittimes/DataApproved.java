@@ -27,12 +27,12 @@ public class DataApproved extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_approved);
 
-        button = (Button) findViewById(R.id.button3);
+        /*button = (Button) findViewById(R.id.button3);
         Hour = getIntent().getIntExtra("hour", -1);
         Year = getIntent().getIntExtra("Year", -1);
         Month = getIntent().getIntExtra("Month", -1);
         Min = getIntent().getIntExtra("min", -1);
-        Day = getIntent().getIntExtra("Day", -1);
+        Day = getIntent().getIntExtra("Day", -1);*/
 
         if (Hour > 12) {
             Hour = Hour - 12;

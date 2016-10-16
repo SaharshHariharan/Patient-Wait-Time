@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,69 +21,32 @@ import com.example.andig.patientwaittimes.db.DML;
 
 import java.text.ParseException;
 
-import static com.example.andig.patientwaittimes.R.id.calendar;
 import static com.example.andig.patientwaittimes.R.id.timePicker;
 import static java.lang.System.in;
 
-public class FilterDateTime extends AppCompatActivity implements Application.ActivityLifecycleCallbacks {
+public class FilterDateTime extends AppCompatActivity /*implements Application.ActivityLifecycleCallbacks*/ {
+
     int hour;
     int min;
     int ID;
     int Year;
     int Month;
     int Day;
-    CalendarView calendar;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_date_time);
         ID = getIntent().getIntExtra("ID", -1);
+        button = (Button)findViewById(R.id.switccch);
 
     }
 
-    @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        calendar = (CalendarView) findViewById(R.id.calendar);
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Year = year;
-                Month = month;
-                Day = dayOfMonth;
-                String newString = dayOfMonth + "/" + (month + 1) + "/" + year;
-                System.out.println(newString);
-            }
-        });
-    }
-
-    @Override
-    public void onActivityStarted(Activity activity) {
-    }
-
-    public void onActivityResumed(Activity FilterDateTime) {
-
-
-    }
-
-    @Override
-    public void onActivityPaused(Activity activity) {
-    }
-
-    @Override
-    public void onActivityStopped(Activity activity) {
-    }
-
-    @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-    }
-
-    @Override
-    public void onActivityDestroyed(Activity activity) {
-    }
 
     public void switcher(View view) {
-        if (view.getId() == R.id.button2) {
+
+        if (view.getId() == R.id.switccch) {
             Intent intent = new Intent(FilterDateTime.this, DataApproved.class);
 
             TimePicker timePicker1;
