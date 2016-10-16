@@ -57,12 +57,13 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month + 1) + "/" + year, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month + 1) + "/" + year, Toast.LENGTH_SHORT).show();
                 Year = year;
                 Month = month;
                 Day = dayOfMonth;
             }
         });
+
     }
 
     @Override
