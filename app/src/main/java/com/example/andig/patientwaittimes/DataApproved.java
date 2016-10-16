@@ -21,18 +21,20 @@ public class DataApproved extends AppCompatActivity {
     int Min;
     int Day;
     Button button;
+    int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_approved);
 
-        /*button = (Button) findViewById(R.id.button3);
+        ID = getIntent().getIntExtra("ID", -1);
+        button = (Button) findViewById(R.id.button3);
         Hour = getIntent().getIntExtra("hour", -1);
         Year = getIntent().getIntExtra("Year", -1);
         Month = getIntent().getIntExtra("Month", -1);
         Min = getIntent().getIntExtra("min", -1);
-        Day = getIntent().getIntExtra("Day", -1);*/
+        Day = getIntent().getIntExtra("Day", -1);
 
         if (Hour > 12) {
             Hour = Hour - 12;
@@ -53,6 +55,7 @@ public class DataApproved extends AppCompatActivity {
     public void switcher(View view) {
         if (view.getId() == R.id.button3) {
             Intent intent = new Intent(DataApproved.this, PatientsSchedule.class);
+            intent.putExtra("ID", ID);
             intent.putExtra("hour", Hour);
             intent.putExtra("Year", Year);
             intent.putExtra("Day", Day);

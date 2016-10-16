@@ -61,11 +61,13 @@ public class PatientsSchedule extends ListActivity {
     public void switcher (View view){
         if (view.getId() == R.id.addBtn) {
             Intent intent = new Intent (PatientsSchedule.this, FilterDateTime.class);
+            intent.putExtra("ID", ID);
             startActivity(intent);
         }
 
         else if (view.getId() == R.id.wait) {
             Intent intent = new Intent (PatientsSchedule.this, Queue.class);
+            intent.putExtra("ID", ID);
             intent.putExtra("Type", "patient");
             startActivity(intent);
         }

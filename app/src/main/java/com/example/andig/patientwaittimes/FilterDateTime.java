@@ -34,17 +34,17 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        calendar = (CalendarView) findViewById(R.id.calendar);
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Year = year;
-                Month = month;
-                Day = dayOfMonth;
-                String newString = dayOfMonth + "/" + (month + 1) + "/" + year;
-                System.out.println(newString);
-            }
-        });
+//        calendar = (CalendarView) findViewById(R.id.calendar);
+//        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+//            @Override
+//            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+//                Year = year;
+//                Month = month;
+//                Day = dayOfMonth;
+//                String newString = dayOfMonth + "/" + (month + 1) + "/" + year;
+//                System.out.println(newString);
+//            }
+//        });
     }
 
     @Override
@@ -73,7 +73,7 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
     }
 
     public void switcher(View view) {
-        if (view.getId() == R.id.button2) {
+        if (view.getId() == R.id.switccch) {
             Intent intent = new Intent(FilterDateTime.this, DataApproved.class);
 
             TimePicker timePicker1;
@@ -98,6 +98,7 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
             intent.putExtra("Day", Day);
             intent.putExtra("min", min);
             intent.putExtra("Month", Month);
+            intent.putExtra("ID", ID);
             startActivity(intent);
         }
     }
