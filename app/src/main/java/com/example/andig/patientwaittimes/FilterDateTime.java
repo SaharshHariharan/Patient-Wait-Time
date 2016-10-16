@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,6 +89,13 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
             timePicker1 = (TimePicker) findViewById(R.id.timePicker);
             hour = timePicker1.getCurrentHour();
             min = timePicker1.getCurrentMinute();
+
+            DatePicker datePicker;
+            datePicker = (DatePicker) findViewById(R.id.datePicker) ;
+            Year = datePicker.getYear();
+            Month = datePicker.getMonth();
+            Day = datePicker.getDayOfMonth();
+
             DML dml = new DML(getApplicationContext());
             try {
                 dml.addAppointment(Year, Month, Day, hour, min, 1, ID);
