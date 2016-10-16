@@ -36,7 +36,7 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
         setContentView(R.layout.activity_filter_date_time);
         ID = getIntent().getIntExtra("ID", -1);
         System.out.println("hello");
-        calendar = (CalendarView) findViewById(R.id.ccalendar);
+        calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
