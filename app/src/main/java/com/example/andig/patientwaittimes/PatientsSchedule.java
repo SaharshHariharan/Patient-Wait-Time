@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.String.valueOf;
 
@@ -46,21 +47,33 @@ public class PatientsSchedule extends ListActivity {
         ID = getIntent().getIntExtra("ID", -1);
         BButton = (Button)findViewById(R.id.addBtn);
         wait = (Button)findViewById(R.id.wait);
-
+        int Counter = 0;
+        List<String> Appointments = new ArrayList<>();
 
 
         if (Hour < 0) {
             Appointment = "No Appointment Booked";
 
-        } if (Min < 10 & Min > 0){
+        } if (Min < 10 && Min > 0){
             Appointment = "Appointment on " + valueOf(Month) + "/" + valueOf(Day) + "/" + valueOf(Year) + " at " + valueOf(Hour) + ":" + "0" + valueOf(Min);
         }
         else {
             Appointment = "Appointment on " + valueOf(Month) + "/" + valueOf(Day) + "/" + valueOf(Year) + " at " + valueOf(Hour) + ":" + valueOf(Min);
         }
 
-        listItems.add(Appointment);
-        adapter.notifyDataSetChanged();
+        Counter = Counter + 1;
+        Appointments.add(Appointment);
+
+        for(int i=1; i<Counter; i++){
+            listItems.add(Appointments.get(i));
+            adapter.notifyDataSetChanged();
+        }
+
+
+
+        /*listItems.add(Appointment);
+        adapter.notifyDataSetChanged();*/
+
 
     }
 
