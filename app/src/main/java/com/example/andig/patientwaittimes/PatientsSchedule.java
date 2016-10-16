@@ -47,10 +47,16 @@ public class PatientsSchedule extends ListActivity {
         BButton = (Button)findViewById(R.id.addBtn);
         wait = (Button)findViewById(R.id.wait);
 
+
+
         if (Hour < 0) {
             Appointment = "No Appointment Booked";
-        } else {
-            Appointment = valueOf(Month) + "." + valueOf(Day) + " " + valueOf(Year) + "-" + valueOf(Hour) + ":" + valueOf(Min);
+
+        } if (Min < 10 & Min > 0){
+            Appointment = "Appointment on " + valueOf(Month) + "/" + valueOf(Day) + "/" + valueOf(Year) + " at " + valueOf(Hour) + ":" + "0" + valueOf(Min);
+        }
+        else {
+            Appointment = "Appointment on " + valueOf(Month) + "/" + valueOf(Day) + "/" + valueOf(Year) + " at " + valueOf(Hour) + ":" + valueOf(Min);
         }
 
         listItems.add(Appointment);
