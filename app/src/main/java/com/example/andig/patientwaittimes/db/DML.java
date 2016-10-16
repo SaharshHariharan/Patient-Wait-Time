@@ -173,6 +173,18 @@ public class DML extends DatabaseOperator {
         return start - end >= minimum;
     }
 
+    private void approve(Integer appointmentId) {
+        String sql = "UPDATE TABLE " + APPOINTMENT_TABLE_NAME + "SET approved='True'" +
+                " WHERE id == " + appointmentId;
+        database.execSQL(sql);
+    }
+
+    private void inProgress(Integer appointmentId) {
+        String sql = "UPDATE TABLE " + APPOINTMENT_TABLE_NAME + "SET in_progress ='True'" +
+                " WHERE id == " + appointmentId;
+        database.execSQL(sql);
+    }
+
 
     public SQLiteDatabase open() {
         if (database != null) {
