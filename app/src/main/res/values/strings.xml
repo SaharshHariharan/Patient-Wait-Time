@@ -14,4 +14,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="please_select_your_desired_time">Please select your desired time</string>
+    <string name="press_to_submit">Press to submit</string>
+    <string name="please_select_your_desired_date">Please select your desired date</string>
+    <string name="click_to_book_new_appointment">Click to Book New Appointment</string>
 </resources>

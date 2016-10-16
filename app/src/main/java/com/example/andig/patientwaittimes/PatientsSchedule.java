@@ -9,7 +9,6 @@ import android.widget.CalendarView;
 
 public class PatientsSchedule extends AppCompatActivity {
 
-    CalendarView calendar;
     Button button;
     Integer ID;
     int Hour;
@@ -30,8 +29,6 @@ public class PatientsSchedule extends AppCompatActivity {
         Day = getIntent().getIntExtra("Day", -1);
         ID = getIntent().getIntExtra("ID", -1);
         button = (Button)findViewById(R.id.button);
-        calendar = (CalendarView) findViewById (R.id.calendar);
-
     }
 
     public void switcher (View view){

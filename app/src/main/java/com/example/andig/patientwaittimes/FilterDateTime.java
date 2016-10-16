@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -36,11 +37,15 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_date_time);
         ID = getIntent().getIntExtra("ID", -1);
-        System.out.println("hello");
+
+    }
+
+    @Override
+    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 Year = year;
                 Month = month;
                 Day = dayOfMonth;
@@ -49,9 +54,6 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
             }
         });
     }
-
-    @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
 
     @Override
     public void onActivityStarted(Activity activity) {
