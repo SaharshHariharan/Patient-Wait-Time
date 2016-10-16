@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.example.andig.patientwaittimes.db.DML;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class PatientsSchedule extends ListActivity {
     String Appointment;
     Button BButton;
     Button wait;
+    List<String> appointments;
 
 
     @Override
@@ -47,10 +50,20 @@ public class PatientsSchedule extends ListActivity {
         ID = getIntent().getIntExtra("ID", -1);
         BButton = (Button)findViewById(R.id.addBtn);
         wait = (Button)findViewById(R.id.wait);
-        int Counter = 0;
-        List<String> Appointments = new ArrayList<>();
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        refresh();
+    }
 
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    public void refresh() {
         if (Hour < 0) {
             Appointment = "No Appointment Booked";
 
@@ -61,20 +74,15 @@ public class PatientsSchedule extends ListActivity {
             Appointment = "Appointment on " + valueOf(Month) + "/" + valueOf(Day) + "/" + valueOf(Year) + " at " + valueOf(Hour) + ":" + valueOf(Min);
         }
 
-        Counter = Counter + 1;
-        Appointments.add(Appointment);
+        DML dml = new DML(getApplicationContext());
+        appointments = dml.getAppointments(ID);
 
-        for(int i=1; i<Counter; i++){
-            listItems.add(Appointments.get(i));
+        for(String entry : appointments){
+            listItems.add(entry);
             adapter.notifyDataSetChanged();
         }
-
-
-
-        /*listItems.add(Appointment);
-        adapter.notifyDataSetChanged();*/
-
-
+        listItems.add(Appointment);
+        adapter.notifyDataSetChanged();
     }
 
     public void switcher (View view){

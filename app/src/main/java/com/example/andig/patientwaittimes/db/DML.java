@@ -206,4 +206,21 @@ public class DML extends DatabaseOperator {
         onCreate(database);
         fillData();
     }
+
+    public List<String> getAppointments(int patientId) {
+        String sql = "SELECT * FROM " + APPOINTMENT_TABLE_NAME + " WHERE patient_id == " + patientId + " ORDER BY start";
+        Cursor cursor = database.rawQuery(sql, null);
+        List<String> result = new ArrayList<>();
+        String temp;
+        if (cursor.moveToFirst()) {
+            temp = cursor.getString(cursor.getColumnIndex("start")) + " to " +  cursor.getString(cursor.getColumnIndex("end"));
+            result.add(temp);
+            while (cursor.moveToNext()) {
+                temp = cursor.getString(cursor.getColumnIndex("start")) + " to " +  cursor.getString(cursor.getColumnIndex("end"));
+                result.add(temp);
+            }
+        }
+        cursor.close();
+        return result;
+    }
 }
