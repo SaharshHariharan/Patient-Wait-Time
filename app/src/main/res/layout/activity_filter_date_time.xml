@@ -34,31 +34,33 @@
             android:layout_marginTop="34dp"
             android:text="@string/please_select_your_desired_time" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/timePicker"
-            android:layout_alignTop="@+id/timePicker"
-            android:layout_marginTop="393dp"
-            android:onClick="switcher"
-            android:text="@string/press_to_submit" />
-
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/textView"
-            android:layout_height="400dp" />
 
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="300dp"
             android:layout_height="350dp"
-            android:layout_below="@+id/datePicker"
+            android:headerBackground="@android:color/holo_blue_dark"
+            android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="17dp"
-            android:headerBackground="@android:color/holo_blue_dark" />
+            android:layout_marginTop="344dp" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="Press to Switch"
+            android:onClick="switcher"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/switccch"
+
+            android:layout_below="@+id/timePicker"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="28dp" />
 
 
     </RelativeLayout>

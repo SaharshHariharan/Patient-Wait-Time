@@ -6,20 +6,32 @@
     android:layout_height="fill_parent" >
     <Button
         android:id="@+id/addBtn"
-        android:text="Book a New Appointment"
+        android:text="Add Next Person"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="switcher"/>
+        android:onClick="addItems"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:contentDescription="Type who you would like to remove"
+        android:hint="Type who you would like to remove" />
+
     <Button
-        android:id="@+id/wait"
-        android:text="View Current Waitlist"
+        android:id="@+id/remBtn"
+        android:text="Press When Ready to Remove"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="switcher"/>
+        android:onClick="removeItems"/>
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:drawSelectorOnTop="false"
-        />
+        >
+    </ListView>
 </LinearLayout>

@@ -3,27 +3,17 @@ package com.example.andig.patientwaittimes;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
-import android.support.annotation.IdRes;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TimePicker;
 
 import com.example.andig.patientwaittimes.db.DML;
 
 import java.text.ParseException;
-import java.util.Arrays;
-
-import static com.example.andig.patientwaittimes.R.id.calendar;
-import static com.example.andig.patientwaittimes.R.id.timePicker;
-import static java.lang.System.in;
 
 public class FilterDateTime extends AppCompatActivity implements Application.ActivityLifecycleCallbacks {
     int hour;
@@ -39,6 +29,7 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_date_time);
         ID = getIntent().getIntExtra("ID", -1);
+
     }
 
     @Override
