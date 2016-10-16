@@ -3,7 +3,6 @@ package com.example.andig.patientwaittimes.db;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabaseLockedException;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class DML extends DatabaseOperator {
         fillData();
     }
 
-    public void fillData() {
+    private void fillData() {
         database.execSQL("INSERT INTO Doctor (name) VALUES ('Test doctor');");
         database.execSQL("INSERT INTO Patient (doctor_id, name, username, password) VALUES\n" +
                 "  ((SELECT id FROM Doctor WHERE Doctor.name == 'Test doctor'),\n" +
@@ -50,7 +49,7 @@ public class DML extends DatabaseOperator {
         return null;
     }
 
-    public Integer getDoctorId(int id) {
+    private Integer getDoctorId(int id) {
         String sql = "SELECT doctor_id FROM " + PATIENT_TABLE_NAME + " WHERE id == " + id;
         Cursor cursor = database.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
@@ -151,7 +150,7 @@ public class DML extends DatabaseOperator {
         return result;
     }
 
-    public String[] getDoctorHours(int doctorId) {
+    private String[] getDoctorHours(int doctorId) {
         String sql = "SELECT start, end FROM Doctor WHERE id == " + doctorId + ";";
         Cursor cursor = database.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
@@ -188,7 +187,6 @@ public class DML extends DatabaseOperator {
 
     public SQLiteDatabase open() {
         if (database != null) {
-
             database.close();
         }
         database = getWritableDatabase();
