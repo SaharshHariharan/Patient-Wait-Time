@@ -46,7 +46,6 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
                 Day = dayOfMonth;
                 String newString = dayOfMonth + "/" + (month + 1) + "/" + year;
                 System.out.println(newString);
-                Toast.makeText(getApplicationContext(), newString, Toast.LENGTH_SHORT).show();
             }
         });
     }
