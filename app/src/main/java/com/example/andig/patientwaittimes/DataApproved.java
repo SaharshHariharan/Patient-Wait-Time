@@ -19,11 +19,11 @@ public class DataApproved extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_approved);
 
-        Hour = getIntent().getIntExtra("hour", 0);
-        Year = getIntent().getIntExtra("Year",2000);
-        Month = getIntent().getIntExtra("Month", 0);
-        Min = getIntent().getIntExtra("min", 0);
-        Day = getIntent().getIntExtra("Day", 0);
+        Hour = getIntent().getIntExtra("hour", -1);
+        Year = getIntent().getIntExtra("Year", -1);
+        Month = getIntent().getIntExtra("Month", -1);
+        Min = getIntent().getIntExtra("min", -1);
+        Day = getIntent().getIntExtra("Day", -1);
 
         if (Hour > 12) {
             Hour = Hour - 12;
@@ -33,15 +33,15 @@ public class DataApproved extends AppCompatActivity {
         TextView Time = (TextView) findViewById(R.id.textView3);
         TextView Date = (TextView) findViewById(R.id.textView8);
 
-
-        if (Min < 10) {
-            Time.setText(Hour + " :0" + Min + AMPM);
-            Date.setText(Day + "/" + Month + "/" + Year);
-        }else
-            Time.setText(Hour + " :" + Min + AMPM);
-        Date.setText(Day + "/" + Month + "/" + Year);}
-
+        String hour = (Hour < 10 ? "0" : "") + Hour;
+        String minute = (Min < 10 ? "0" : "") + Min;
+        Time.setText(hour + ":" + minute);
+        System.out.println(Day + "/" + Month + "/" + Year);
+        Date.setText(Day + "/" + Month + "/" + Year);
 
     }
+
+
+}
 
 
