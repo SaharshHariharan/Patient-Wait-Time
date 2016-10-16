@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import com.example.andig.patientwaittimes.db.DML;
 
 import java.text.ParseException;
+import java.util.Arrays;
 
 import static com.example.andig.patientwaittimes.R.id.calendar;
 import static com.example.andig.patientwaittimes.R.id.timePicker;
@@ -38,7 +39,6 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_date_time);
         ID = getIntent().getIntExtra("ID", -1);
-
     }
 
     @Override
