@@ -24,7 +24,7 @@ public class DML extends DatabaseOperator {
     }
 
     private void fillData() {
-        database.execSQL("INSERT INTO Doctor (name) VALUES ('Test doctor');");
+        database.execSQL("INSERT INTO Doctor (name, username, password) VALUES ('Test doctor', 'admin', 'admin');");
         database.execSQL("INSERT INTO Patient (doctor_id, name, username, password) VALUES\n" +
                 "  ((SELECT id FROM Doctor WHERE Doctor.name == 'Test doctor'),\n" +
                 "    'Test patient',\n" +
@@ -46,6 +46,16 @@ public class DML extends DatabaseOperator {
         }
         cursor.close();
 
+        return null;
+    }
+
+    public Integer verifyAdmin(String username, String password) {
+        String sql = "SELECT id FROM " + DOCTOR_TABLE_NAME + " WHERE username == '" + username + "' AND password == '" + password + "';";
+        Cursor cursor = database.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(0);
+        }
+        cursor.close();
         return null;
     }
 
@@ -82,8 +92,6 @@ public class DML extends DatabaseOperator {
                 "('" + formattedDate + "', '" + formattedNewDate + "', " + patient_id + ", " + doctorId + ");";
         System.out.println(sql);
         database.execSQL(sql);
-
-
     }
 
     public void updateProgress(int appointmentId) {
@@ -191,5 +199,11 @@ public class DML extends DatabaseOperator {
         }
         database = getWritableDatabase();
         return database;
+    }
+
+    public void reset() {
+        destroyAll(database);
+        onCreate(database);
+        fillData();
     }
 }

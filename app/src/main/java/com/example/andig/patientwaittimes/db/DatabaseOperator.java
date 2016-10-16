@@ -13,6 +13,8 @@ public class DatabaseOperator extends SQLiteOpenHelper {
     static final String APPOINTMENT_TABLE_NAME = "Appointment";
     private static final String CREATE_DOCTOR_TABLE = "CREATE TABLE Doctor (\n" +
             "  id   INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "  username INTEGER NOT NULL, \n" +
+            "  password CHAR(20) NOT NULL, \n" +
             "  name VARCHAR NOT NULL,\n" +
             "  start TIME DEFAULT '08:00',\n" +
             "  end TIME DEFAULT '16:00'\n" +

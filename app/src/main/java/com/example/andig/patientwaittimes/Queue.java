@@ -26,11 +26,13 @@ public class Queue extends ListActivity {
     //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
     int clickCounter=0;
     int number = 3;
+    int ID;
     String [] Names = {"Tony", "Andi", "Saharsh", "Anthony", "Brandon", "Raj", "Leonard"};
 
 
     @Override
     public void onCreate(Bundle icicle) {
+        ID = getIntent().getIntExtra("ID", -1);
         super.onCreate(icicle);
         setContentView(R.layout.activity_queue);
         adapter=new ArrayAdapter<String>(this,

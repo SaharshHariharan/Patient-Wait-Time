@@ -1,6 +1,5 @@
 package com.example.andig.patientwaittimes;
 
-import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -270,7 +269,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
-        private Integer id;
+        private Integer patientId;
+        private Integer adminId;
         private DML dml;
 
         UserLoginTask(String username, String password) {
@@ -282,9 +282,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             dml = new DML(getApplicationContext());
-            id = dml.verifyUser(mEmail, mPassword);
+            dml.reset();
+            patientId = dml.verifyUser(mEmail, mPassword);
+            adminId = dml.verifyAdmin(mEmail, mPassword);
             dml.close();
-            return id != null;
+            System.out.println(patientId + " " + adminId);
+            return ! (patientId == null && adminId == null);
         }
 
         @Override
@@ -293,9 +296,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent (LoginActivity.this, PatientsSchedule.class);
-                intent.putExtra("ID", id);
-                startActivity(intent);
+                if (patientId != null) {
+                    Intent intent = new Intent(LoginActivity.this, PatientsSchedule.class);
+                    intent.putExtra("ID", patientId);
+                    intent.putExtra("Type", "patient");
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(LoginActivity.this, Queue.class);
+                    intent.putExtra("ID", adminId);
+                    intent.putExtra("Type", "admin");
+                    startActivity(intent);
+                }
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
