@@ -12,12 +12,22 @@ public class PatientsSchedule extends AppCompatActivity {
     CalendarView calendar;
     Button button;
     Integer ID;
+    int Hour;
+    int Year;
+    int Month;
+    int Min;
+    int Day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_schedule);
 
+        Hour = getIntent().getIntExtra("hour", -1);
+        Year = getIntent().getIntExtra("Year", -1);
+        Month = getIntent().getIntExtra("Month", -1);
+        Min = getIntent().getIntExtra("min", -1);
+        Day = getIntent().getIntExtra("Day", -1);
         ID = getIntent().getIntExtra("ID", -1);
         button = (Button)findViewById(R.id.button);
         calendar = (CalendarView) findViewById (R.id.calendar);
