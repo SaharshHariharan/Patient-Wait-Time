@@ -18,6 +18,7 @@ import com.example.andig.patientwaittimes.db.DML;
 
 import java.text.ParseException;
 
+import static com.example.andig.patientwaittimes.R.id.calendar;
 import static com.example.andig.patientwaittimes.R.id.timePicker;
 import static java.lang.System.in;
 
