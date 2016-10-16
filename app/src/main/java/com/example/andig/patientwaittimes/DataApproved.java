@@ -20,7 +20,7 @@ public class DataApproved extends AppCompatActivity {
         setContentView(R.layout.activity_data_approved);
 
         Hour = getIntent().getIntExtra("hour", 0);
-        Year = getIntent().getIntExtra("Year", 0);
+        Year = getIntent().getIntExtra("Year",2000);
         Month = getIntent().getIntExtra("Month", 0);
         Min = getIntent().getIntExtra("min", 0);
         Day = getIntent().getIntExtra("Day", 0);

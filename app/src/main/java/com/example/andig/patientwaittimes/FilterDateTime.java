@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TimePicker;
 
+import static com.example.andig.patientwaittimes.R.id.datePicker;
 import static com.example.andig.patientwaittimes.R.id.timePicker;
 import static java.lang.System.in;
 
@@ -52,10 +54,10 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month + 1) + "/" + year, Toast.LENGTH_SHORT).show();
                 Year = year;
                 Month = month;
                 Day = dayOfMonth;
+                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + (month + 1) + "/" + year, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,6 +91,12 @@ public class FilterDateTime extends AppCompatActivity implements Application.Act
             timePicker1 = (TimePicker) findViewById(R.id.timePicker);
             hour = timePicker1.getCurrentHour();
             min = timePicker1.getCurrentMinute();
+
+            DatePicker datePicker;
+            datePicker = (DatePicker) findViewById(R.id.datePicker);
+            Year = datePicker.getYear();
+            Month = datePicker.getMonth();
+            Day = datePicker.getDayOfMonth();
 
             intent.putExtra("hour", hour);
             intent.putExtra("Year", Year);
